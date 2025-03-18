@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using devopsVinicius.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<devopsViniciusContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("devopsViniciusContext") ?? throw new InvalidOperationException("Connection string 'devopsViniciusContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
